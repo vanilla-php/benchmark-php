@@ -2,15 +2,15 @@
 
 /**
  * PHP Script to benchmark PHP and MySQL-Server
- * 
- * inspired by / thanks to:  
+ *
+ * inspired by / thanks to:
  * - www.php-benchmark-script.com  (Alessandro Torrisi)
  * - www.webdesign-informatik.de
- * 
- * @author Daniel Opitz
+ *
+ * @author odan
  * @version 2014.02.23
  * @license MIT
- * 
+ *
  */
 // -----------------------------------------------------------------------------
 // Setup
@@ -130,11 +130,11 @@ function test_ifelse(&$arr_return, $count = 999999)
     $time_start = microtime(true);
     for ($i = 0; $i < $count; $i++) {
         if ($i == -1) {
-            
+
         } elseif ($i == -2) {
-            
+
         } else if ($i == -3) {
-            
+
         }
     }
     $arr_return['benchmark']['ifelse'] = timer_diff($time_start);
