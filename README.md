@@ -1,7 +1,7 @@
 benchmark-php
 =============
 
-This is a PHP benchmark script to compare the runtime speed of PHP and MySQL. This project is inspired by www.php-benchmark-script.com (Alessandro Torrisi) an www.webdesign-informatik.de. In my point of view this script is more correct and comparable for different servers.
+This is a PHP benchmark script to compare the runtime speed of PHP and MySQL. This project is inspired by www.php-benchmark-script.com (Alessandro Torrisi) an www.webdesign-informatik.de. In my point of view benchmark-php is more correct and comparable for different servers.
 
 Setup
 
