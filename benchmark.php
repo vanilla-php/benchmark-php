@@ -158,7 +158,7 @@ function test_mysql(&$arr_return, $arr_cfg)
     $arr_return['sysinfo']['mysql_version'] = $arr_row['version'];
     $arr_return['benchmark']['mysql']['query_version'] = timer_diff($time_start);
 
-    $query = "SELECT BENCHMARK(1000000,ENCODE('hello','goodbye'));";
+    $query = "SELECT BENCHMARK(1000000,ENCODE('hello'));";
     $result = mysqli_query($link, $query);
     $arr_return['benchmark']['mysql']['query_benchmark'] = timer_diff($time_start);
 
