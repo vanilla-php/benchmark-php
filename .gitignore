@@ -1,3 +1,6 @@
-/nbproject/private/
-/nbproject/
-/_doc/
+.idea/
+composer.lock
+nbproject/
+vendor/
+build/
+_doc/
