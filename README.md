@@ -18,10 +18,10 @@ http://www.example.com/benchmark.php
 - Edit this lines
 
 ```php
-$arr_cfg['db.host'] = 'hostname';
-$arr_cfg['db.user'] = 'username';
-$arr_cfg['db.pw'] = 'password';
-$arr_cfg['db.name'] = 'database';
+$options['db.host'] = 'hostname';
+$options['db.user'] = 'username';
+$options['db.pw'] = 'password';
+$options['db.name'] = 'database';
 ```
 
 - Upload and run the script
