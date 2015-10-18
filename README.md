@@ -24,4 +24,4 @@ $arr_cfg['db.pw'] = 'password';
 $arr_cfg['db.name'] = 'database';
 ```
 
-- upload and run the script
+- Upload and run the script
