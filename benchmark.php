@@ -31,15 +31,15 @@ $benchmarkResult = test_benchmark($options);
 // html output
 echo "<!DOCTYPE html>\n<html><head>\n";
 echo "<style>
-    table { 
+    table {
         color: #333; /* Lighten up font color */
         font-family: Helvetica, Arial, sans-serif; /* Nicer font */
-        width: 640px; 
-        border-collapse: 
-        collapse; border-spacing: 0; 
+        width: 640px;
+        border-collapse:
+        collapse; border-spacing: 0;
     }
 
-    td, th { 
+    td, th {
         border: 1px solid #CCC; height: 30px;
     } /* Make cells a bit taller */
 
@@ -91,7 +91,7 @@ function test_benchmark($settings)
 function test_math(&$result, $count = 99999)
 {
     $timeStart = microtime(true);
-    
+
     $mathFunctions = array("abs", "acos", "asin", "atan", "bindec", "floor", "exp", "sin", "tan", "pi", "is_finite", "is_nan", "sqrt");
     for ($i = 0; $i < $count; $i++) {
         foreach ($mathFunctions as $function) {
@@ -118,7 +118,9 @@ function test_string(&$result, $count = 99999)
 function test_loops(&$result, $count = 999999)
 {
     $timeStart = microtime(true);
-    for ($i = 0; $i < $count; ++$i);
+    for ($i = 0; $i < $count; ++$i) {
+
+    }
     $i = 0;
     while ($i < $count) {
         ++$i;
@@ -131,11 +133,11 @@ function test_ifelse(&$result, $count = 999999)
     $timeStart = microtime(true);
     for ($i = 0; $i < $count; $i++) {
         if ($i == -1) {
-            
+
         } elseif ($i == -2) {
-            
+
         } else if ($i == -3) {
-            
+
         }
     }
     $result['benchmark']['ifelse'] = timer_diff($timeStart);
@@ -158,7 +160,7 @@ function test_mysql(&$result, $settings)
     $result['sysinfo']['mysql_version'] = $arr_row['version'];
     $result['benchmark']['mysql']['query_version'] = timer_diff($timeStart);
 
-    $query = "SELECT BENCHMARK(1000000,ENCODE('hello','goodbye'));";
+    $query = "SELECT BENCHMARK(1000000,ENCODE('hello',RAND()));";
     $dbResult = mysqli_query($link, $query);
     $result['benchmark']['mysql']['query_benchmark'] = timer_diff($timeStart);
 
