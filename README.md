@@ -5,6 +5,10 @@ This project is inspired by www.php-benchmark-script.com (Alessandro Torrisi)
 an www.webdesign-informatik.de. In my point of view this script is more 
 correct and comparable for different servers.
 
+## Screenshot
+
+![benchmark_v12](https://user-images.githubusercontent.com/781074/36862772-286568de-1d88-11e8-98c5-6340f8ea3415.jpg)
+
 ## Setup
 
 Upload benchmark.php and execute it:<br>
