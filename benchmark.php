@@ -2,6 +2,7 @@
 
 /**
  * PHP Script to benchmark PHP and MySQL-Server
+ * http://odan.github.io/benchmark-php/
  *
  * inspired by / thanks to:
  * - www.php-benchmark-script.com  (Alessandro Torrisi)
