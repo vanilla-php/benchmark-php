@@ -146,7 +146,7 @@ exit;
 function test_benchmark($settings)
 {
     $result = array();
-    $result['version'] = '1.2';
+    $result['version'] = '1.4';
     $result['sysinfo']['time'] = date('Y-m-d H:i:s');
     $result['sysinfo']['php_version'] = PHP_VERSION;
     $result['sysinfo']['platform'] = PHP_OS;
@@ -246,7 +246,7 @@ function test_mysql(&$result, $settings)
     $result['sysinfo']['mysql_version'] = $arr_row['version'];
     $result['benchmark']['mysql_query_version'] = timer_diff($timeStart) . ' sec.';
 
-    $query = "SELECT BENCHMARK(1000000,ENCODE('hello',RAND()));";
+    $query = "SELECT BENCHMARK(1000000, AES_ENCRYPT('hello', UNHEX('F3229A0B371ED2D9441B830D21A390C3')));";
     mysqli_query($link, $query);
     $result['benchmark']['mysql_query_benchmark'] = timer_diff($timeStart) . ' sec.';
 
