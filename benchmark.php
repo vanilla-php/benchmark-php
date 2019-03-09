@@ -29,7 +29,7 @@ $showServerName = false;
 //$options['db.name'] = 'test';
 
 //External MySQL results insert (optional-external-db.sql)
-//$log_results = 0;//1 for yes, 0 for no
+$log_results = 0;//1 for yes, 0 for no
 //$external_db_con = mysqli_connect("host", "user", "pass", "php_bench");//external MySQL connection details
 // -----------------------------------------------------------------------------
 // Main
