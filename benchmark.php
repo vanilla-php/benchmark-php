@@ -28,6 +28,9 @@ $showServerName = false;
 //$options['db.pw'] = '';
 //$options['db.name'] = 'test';
 
+//External MySQL results insert (optional-external-db.sql)
+//$log_results = 0;//1 for yes, 0 for no
+//$external_db_con = mysqli_connect("host", "user", "pass", "php_bench");//external MySQL connection details
 // -----------------------------------------------------------------------------
 // Main
 // -----------------------------------------------------------------------------
@@ -264,6 +267,8 @@ function timer_diff($timeStart)
 
 function print_benchmark_result($data, $showServerName = true)
 {
+    global $log_results;
+    global $external_db_con;
     $result = '<table cellspacing="0">';
     $result .= '<thead><tr><th>System Info</th><th></th></tr></thead>';
     $result .= '<tbody>';
@@ -310,6 +315,9 @@ function print_benchmark_result($data, $showServerName = true)
     $result .= '<thead><tr><th>Total</th><th>' . h($data['benchmark']['total']) . '</th></tr></thead>';
     $result .= '</table>';
 
+    if ($log_results == 1) {//external mysql insert
+        $insert_ext = mysqli_query($external_db_con, "INSERT INTO `benchmarks` (`server`,`php_version`,`platform`,`strings`,`version`,`loops`,`if_else`,`calc_total`,`mysql_version`,`mysql_con`,`mysql_sel`,`mysql_query`,`mysql_bench`,`mysql_total`, `time`, `total_time`) VALUES ('" . h($data['sysinfo']['server_name']) . "', '" . h($data['sysinfo']['php_version']) . "', '" . h($data['sysinfo']['platform']) . "','" . h($data['benchmark']['string']) . "', '" . h($data['version']) . "', '" . h($data['benchmark']['loops']) . "','" . h($data['benchmark']['ifelse']) . "','" . h($data['benchmark']['calculation_total']) . "','" . h($data['sysinfo']['mysql_version']) . "','" . h($data['benchmark']['mysql_connect']) . "','" . h($data['benchmark']['mysql_select_db']) . "','" . h($data['benchmark']['mysql_query_version']) . "','" . h($data['benchmark']['mysql_query_benchmark']) . "', '" . h($data['benchmark']['mysql_total']) . "',  '" . h($data['sysinfo']['time']) . "', '" . h($data['benchmark']['total']) . "')");
+    }
     return $result;
 }
 
