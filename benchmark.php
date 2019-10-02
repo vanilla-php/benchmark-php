@@ -20,13 +20,13 @@ set_time_limit(120); // 2 minutes
 $options = array();
 
 // Show or hide the server name and IP address
-$showServerName = true;
+$showServerName = false;
 
 // Optional: mysql performance test
-$options['db.host'] = '172.28.2.148';
-$options['db.user'] = 'web.etics';
-$options['db.pw'] = '2w/QNfN~Q2H}';
-$options['db.name'] = 'S01_etics';
+/*$options['db.host'] = '';
+$options['db.user'] = '';
+$options['db.pw'] = '';
+$options['db.name'] = '';*/
 
 // -----------------------------------------------------------------------------
 // Main
