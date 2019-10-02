@@ -20,13 +20,13 @@ set_time_limit(120); // 2 minutes
 $options = array();
 
 // Show or hide the server name and IP address
-$showServerName = false;
+$showServerName = true;
 
 // Optional: mysql performance test
-//$options['db.host'] = '127.0.0.1';
-//$options['db.user'] = 'root';
-//$options['db.pw'] = '';
-//$options['db.name'] = 'test';
+$options['db.host'] = '172.28.2.148';
+$options['db.user'] = 'web.etics';
+$options['db.pw'] = '2w/QNfN~Q2H}';
+$options['db.name'] = 'S01_etics';
 
 // -----------------------------------------------------------------------------
 // Main
@@ -289,6 +289,7 @@ function print_benchmark_result($data, $showServerName = true)
 
     $result .= '<thead><tr><th>Benchmark</th><th></th></tr></thead>';
     $result .= '<tbody>';
+     $result .= '<tr><td>Math</td><td>' . h($data['benchmark']['math']) . '</td></tr>';
     $result .= '<tr><td>String</td><td>' . h($data['benchmark']['string']) . '</td></tr>';
     $result .= '<tr><td>Loops</td><td>' . h($data['benchmark']['loops']) . '</td></tr>';
     $result .= '<tr><td>If Else</td><td>' . h($data['benchmark']['ifelse']) . '</td></tr>';
