@@ -1,14 +1,12 @@
 <?php
 
 /**
- * PHP Script to benchmark PHP and MySQL-Server
- * http://odan.github.io/benchmark-php/
+ * PHP Script to benchmark PHP and MySQL-Server.
  *
  * inspired by / thanks to:
- * - www.php-benchmark-script.com  (Alessandro Torrisi)
+ * - www.php-benchmark-script.com (Alessandro Torrisi)
  * - www.webdesign-informatik.de
  *
- * @author odan
  * @license MIT
  */
 
@@ -17,16 +15,16 @@
 // -----------------------------------------------------------------------------
 set_time_limit(120); // 2 minutes
 
-$options = array();
+$options = [];
 
 // Show or hide the server name and IP address
 $showServerName = false;
 
 // Optional: mysql performance test
-/*$options['db.host'] = '';
-$options['db.user'] = '';
-$options['db.pw'] = '';
-$options['db.name'] = '';*/
+//$options['db.host'] = '';
+//$options['db.user'] = '';
+//$options['db.pw'] = '';
+//$options['db.name'] = '';
 
 // -----------------------------------------------------------------------------
 // Main
@@ -143,10 +141,10 @@ exit;
 // Benchmark functions
 // -----------------------------------------------------------------------------
 
-function test_benchmark($settings)
+function test_benchmark(array $settings)
 {
-    $result = array();
-    $result['version'] = '1.4';
+    $result = [];
+    $result['version'] = '1.5';
     $result['sysinfo']['time'] = date('Y-m-d H:i:s');
     $result['sysinfo']['php_version'] = PHP_VERSION;
     $result['sysinfo']['platform'] = PHP_OS;
@@ -176,25 +174,43 @@ function test_math(&$result, $count = 99999)
 {
     $timeStart = microtime(true);
 
-    $mathFunctions = array("abs", "acos", "asin", "atan", "bindec", "floor", "exp", "sin", "tan", "is_finite", "is_nan", "sqrt");
     for ($i = 0; $i < $count; $i++) {
-        foreach ($mathFunctions as $function) {
-            call_user_func_array($function, array($i));
-        }
+        sin($i);
+        asin($i);
+        cos($i);
+        acos($i);
+        tan($i);
+        atan($i);
+        abs($i);
+        floor($i);
+        exp($i);
+        is_finite($i);
+        is_nan($i);
+        sqrt($i);
+        log10($i);
     }
+
     $result['benchmark']['math'] = timer_diff($timeStart) . ' sec.';
 }
 
 function test_string(&$result, $count = 99999)
 {
     $timeStart = microtime(true);
-    $stringFunctions = array("addslashes", "chunk_split", "metaphone", "strip_tags", "md5", "sha1", "strtoupper", "strtolower", "strrev", "strlen", "soundex", "ord");
 
     $string = 'the quick brown fox jumps over the lazy dog';
     for ($i = 0; $i < $count; $i++) {
-        foreach ($stringFunctions as $function) {
-            call_user_func_array($function, array($string));
-        }
+        addslashes($string);
+        chunk_split($string);
+        metaphone($string);
+        strip_tags($string);
+        md5($string);
+        sha1($string);
+        strtoupper($string);
+        strtolower($string);
+        strrev($string);
+        strlen($string);
+        soundex($string);
+        ord($string);
     }
     $result['benchmark']['string'] = timer_diff($timeStart) . ' sec.';
 }
@@ -203,7 +219,6 @@ function test_loops(&$result, $count = 999999)
 {
     $timeStart = microtime(true);
     for ($i = 0; $i < $count; ++$i) {
-
     }
 
     $i = 0;
@@ -219,12 +234,9 @@ function test_ifelse(&$result, $count = 999999)
     $timeStart = microtime(true);
     for ($i = 0; $i < $count; $i++) {
         if ($i == -1) {
-
         } elseif ($i == -2) {
-
         } else {
             if ($i == -3) {
-
             }
         }
     }
@@ -262,7 +274,7 @@ function timer_diff($timeStart)
     return number_format(microtime(true) - $timeStart, 3);
 }
 
-function print_benchmark_result($data, $showServerName = true)
+function print_benchmark_result(array $data, bool $showServerName = true)
 {
     $result = '<table cellspacing="0">';
     $result .= '<thead><tr><th>System Info</th><th></th></tr></thead>';
@@ -289,7 +301,7 @@ function print_benchmark_result($data, $showServerName = true)
 
     $result .= '<thead><tr><th>Benchmark</th><th></th></tr></thead>';
     $result .= '<tbody>';
-     $result .= '<tr><td>Math</td><td>' . h($data['benchmark']['math']) . '</td></tr>';
+    $result .= '<tr><td>Math</td><td>' . h($data['benchmark']['math']) . '</td></tr>';
     $result .= '<tr><td>String</td><td>' . h($data['benchmark']['string']) . '</td></tr>';
     $result .= '<tr><td>Loops</td><td>' . h($data['benchmark']['loops']) . '</td></tr>';
     $result .= '<tr><td>If Else</td><td>' . h($data['benchmark']['ifelse']) . '</td></tr>';
