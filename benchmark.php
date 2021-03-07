@@ -144,7 +144,7 @@ exit;
 function test_benchmark(array $settings)
 {
     $result = [];
-    $result['version'] = '1.5';
+    $result['version'] = '1.6';
     $result['sysinfo']['time'] = date('Y-m-d H:i:s');
     $result['sysinfo']['php_version'] = PHP_VERSION;
     $result['sysinfo']['platform'] = PHP_OS;
