@@ -12,8 +12,14 @@ correct and comparable for different servers.
 ## Setup
 
 Upload benchmark.php and execute it:<br>
+
+HTML response:
+
 http://www.example.com/benchmark.php
 
+JSON response:
+
+http://www.example.com/benchmark.php?json
 
 ## MySQL Setup (optional)
 
