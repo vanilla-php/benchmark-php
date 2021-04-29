@@ -32,109 +32,16 @@ $showServerName = false;
 // check performance
 $benchmarkResult = test_benchmark($options);
 
-// html output
-echo "<!DOCTYPE html>\n<html><head>\n";
-echo "<style>
-       table a:link {
-        color: #666;
-        font-weight: bold;
-        text-decoration:none;
-    }
-    table a:visited {
-        color: #999999;
-        font-weight:bold;
-        text-decoration:none;
-    }
-    table a:active,
-    table a:hover {
-        color: #bd5a35;
-        text-decoration:underline;
-    }
-    table {
-        font-family:Arial, Helvetica, sans-serif;
-        color:#666;
-        font-size:12px;
-        text-shadow: 1px 1px 0px #fff;
-        background:#eaebec;
-        margin:20px;
-        border:#ccc 1px solid;
-        -moz-border-radius:3px;
-        -webkit-border-radius:3px;
-        border-radius:3px;
-        -moz-box-shadow: 0 1px 2px #d1d1d1;
-        -webkit-box-shadow: 0 1px 2px #d1d1d1;
-        box-shadow: 0 1px 2px #d1d1d1;
-    }
-    table th {
-        padding:8px 15px 8px 8px;
-        border-top:1px solid #fafafa;
-        border-bottom:1px solid #e0e0e0;
-        text-align: left;
-        background: #ededed;
-        background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
-        background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
-    }
-    table th:first-child {
-        text-align: left;
-        padding-left:10px;
-    }
-    table tr:first-child th:first-child {
-        -moz-border-radius-topleft:3px;
-        -webkit-border-top-left-radius:3px;
-        border-top-left-radius:3px;
-    }
-    table tr:first-child th:last-child {
-        -moz-border-radius-topright:3px;
-        -webkit-border-top-right-radius:3px;
-        border-top-right-radius:3px;
-    }
-    table tr {
-        padding-left:10px;
-    }
-    table td:first-child {
-        text-align: left;
-        padding-left:10px;
-        border-left: 0;
-    }
-    table td {
-        padding:8px;
-        border-top: 1px solid #ffffff;
-        border-bottom:1px solid #e0e0e0;
-        border-left: 1px solid #e0e0e0;
-        background: #fafafa;
-        background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
-        background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
-    }
-    table tr.even td {
-        background: #f6f6f6;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
-        background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
-    }
-    table tr:last-child td {
-        border-bottom:0;
-    }
-    table tr:last-child td:first-child {
-        -moz-border-radius-bottomleft:3px;
-        -webkit-border-bottom-left-radius:3px;
-        border-bottom-left-radius:3px;
-    }
-    table tr:last-child td:last-child {
-        -moz-border-radius-bottomright:3px;
-        -webkit-border-bottom-right-radius:3px;
-        border-bottom-right-radius:3px;
-    }
-    table tr:hover td {
-        background: #f2f2f2;
-        background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
-        background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
-    }
-    </style>
-    </head>
-    <body>";
+// benchmark.php?json
+if (isset($_GET['json'])) {
+    // Json output
+    header('Content-Type', 'application/json');
+    echo json_encode($benchmarkResult, JSON_PRETTY_PRINT);
+} else {
+    // html output
+    echo print_html_result($benchmarkResult, $showServerName);
+}
 
-echo print_benchmark_result($benchmarkResult, $showServerName);
-
-echo "\n</body></html>";
 exit;
 
 // -----------------------------------------------------------------------------
@@ -159,7 +66,7 @@ function test_benchmark(array $settings)
     test_loops($result);
     test_ifelse($result);
 
-    $result['benchmark']['calculation_total'] = timer_diff($timeStart) . ' sec.';
+    $result['benchmark']['calculation'] = timer_diff($timeStart) . ' sec.';
 
     if (isset($settings['db.host'])) {
         test_mysql($result, $settings);
@@ -274,8 +181,107 @@ function timer_diff($timeStart)
     return number_format(microtime(true) - $timeStart, 3);
 }
 
-function print_benchmark_result(array $data, bool $showServerName = true)
+function print_html_result(array $data, bool $showServerName = true)
 {
+    echo "<!DOCTYPE html>\n<html><head>\n";
+    echo "<style>
+       table a:link {
+        color: #666;
+        font-weight: bold;
+        text-decoration:none;
+    }
+    table a:visited {
+        color: #999999;
+        font-weight:bold;
+        text-decoration:none;
+    }
+    table a:active,
+    table a:hover {
+        color: #bd5a35;
+        text-decoration:underline;
+    }
+    table {
+        font-family:Arial, Helvetica, sans-serif;
+        color:#666;
+        font-size:12px;
+        text-shadow: 1px 1px 0px #fff;
+        background:#eaebec;
+        margin:20px;
+        border:#ccc 1px solid;
+        -moz-border-radius:3px;
+        -webkit-border-radius:3px;
+        border-radius:3px;
+        -moz-box-shadow: 0 1px 2px #d1d1d1;
+        -webkit-box-shadow: 0 1px 2px #d1d1d1;
+        box-shadow: 0 1px 2px #d1d1d1;
+    }
+    table th {
+        padding:8px 15px 8px 8px;
+        border-top:1px solid #fafafa;
+        border-bottom:1px solid #e0e0e0;
+        text-align: left;
+        background: #ededed;
+        background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+        background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+    }
+    table th:first-child {
+        text-align: left;
+        padding-left:10px;
+    }
+    table tr:first-child th:first-child {
+        -moz-border-radius-topleft:3px;
+        -webkit-border-top-left-radius:3px;
+        border-top-left-radius:3px;
+    }
+    table tr:first-child th:last-child {
+        -moz-border-radius-topright:3px;
+        -webkit-border-top-right-radius:3px;
+        border-top-right-radius:3px;
+    }
+    table tr {
+        padding-left:10px;
+    }
+    table td:first-child {
+        text-align: left;
+        padding-left:10px;
+        border-left: 0;
+    }
+    table td {
+        padding:8px;
+        border-top: 1px solid #ffffff;
+        border-bottom:1px solid #e0e0e0;
+        border-left: 1px solid #e0e0e0;
+        background: #fafafa;
+        background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+        background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+    }
+    table tr.even td {
+        background: #f6f6f6;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+        background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+    }
+    table tr:last-child td {
+        border-bottom:0;
+    }
+    table tr:last-child td:first-child {
+        -moz-border-radius-bottomleft:3px;
+        -webkit-border-bottom-left-radius:3px;
+        border-bottom-left-radius:3px;
+    }
+    table tr:last-child td:last-child {
+        -moz-border-radius-bottomright:3px;
+        -webkit-border-bottom-right-radius:3px;
+        border-bottom-right-radius:3px;
+    }
+    table tr:hover td {
+        background: #f2f2f2;
+        background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+        background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+    }
+    </style>
+    </head>
+    <body>";
+
     $result = '<table cellspacing="0">';
     $result .= '<thead><tr><th>System Info</th><th></th></tr></thead>';
     $result .= '<tbody>';
@@ -305,7 +311,9 @@ function print_benchmark_result(array $data, bool $showServerName = true)
     $result .= '<tr><td>String</td><td>' . h($data['benchmark']['string']) . '</td></tr>';
     $result .= '<tr><td>Loops</td><td>' . h($data['benchmark']['loops']) . '</td></tr>';
     $result .= '<tr><td>If Else</td><td>' . h($data['benchmark']['ifelse']) . '</td></tr>';
-    $result .= '<tr class="even"><td>Calculation total</td><td>' . h($data['benchmark']['calculation_total']) . '</td></tr>';
+    $result .= '<tr class="even"><td>Calculation total</td><td>' . h(
+            $data['benchmark']['calculation']
+        ) . '</td></tr>';
     $result .= '</tbody>';
 
     if (isset($data['sysinfo']['mysql_version'])) {
@@ -323,7 +331,9 @@ function print_benchmark_result(array $data, bool $showServerName = true)
     $result .= '<thead><tr><th>Total</th><th>' . h($data['benchmark']['total']) . '</th></tr></thead>';
     $result .= '</table>';
 
-    return $result;
+    echo $result;
+
+    echo "\n</body></html>";
 }
 
 function h($v)
