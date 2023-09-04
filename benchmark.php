@@ -285,8 +285,8 @@ function print_html_result(array $data, bool $showServerName = true)
     $result = '<table cellspacing="0">';
     $result .= '<thead><tr><th>System Info</th><th></th></tr></thead>';
     $result .= '<tbody>';
-    $result .= '<tr class="even"><td>Version</td><td>' . h($data['version']) . '</td></tr>';
-    $result .= '<tr class="even"><td>Time</td><td>' . h($data['sysinfo']['time']) . '</td></tr>';
+    $result .= '<tr class="even"><td>Version</td><td>' . h($data['version']) . '</td></tr>'."\n";
+    $result .= '<tr class="even"><td>Time</td><td>' . h($data['sysinfo']['time']) . '</td></tr>'."\n";
 
     if (!empty($data['sysinfo']['xdebug'])) {
         // You are running the benchmark with xdebug enabled. This has a major impact on runtime performance.
@@ -295,22 +295,22 @@ function print_html_result(array $data, bool $showServerName = true)
             . '</span></td></tr>';
     }
 
-    $result .= '<tr class="even"><td>PHP Version</td><td>' . h($data['sysinfo']['php_version']) . '</td></tr>';
-    $result .= '<tr class="even"><td>Platform</td><td>' . h($data['sysinfo']['platform']) . '</td></tr>';
+    $result .= '<tr class="even"><td>PHP Version</td><td>' . h($data['sysinfo']['php_version']) . '</td></tr>'."\n";
+    $result .= '<tr class="even"><td>Platform</td><td>' . h($data['sysinfo']['platform']) . '</td></tr>'."\n";
 
     if ($showServerName == true) {
-        $result .= '<tr class="even"><td>Server name</td><td>' . h($data['sysinfo']['server_name']) . '</td></tr>';
-        $result .= '<tr class="even"><td>Server address</td><td>' . h($data['sysinfo']['server_addr']) . '</td></tr>';
+        $result .= '<tr class="even"><td>Server name</td><td>' . h($data['sysinfo']['server_name']) . '</td></tr>'."\n";
+        $result .= '<tr class="even"><td>Server address</td><td>' . h($data['sysinfo']['server_addr']) . '</td></tr>'."\n";
     }
 
     $result .= '</tbody>';
 
     $result .= '<thead><tr><th>Benchmark</th><th></th></tr></thead>';
     $result .= '<tbody>';
-    $result .= '<tr><td>Math</td><td>' . h($data['benchmark']['math']) . '</td></tr>';
-    $result .= '<tr><td>String</td><td>' . h($data['benchmark']['string']) . '</td></tr>';
-    $result .= '<tr><td>Loops</td><td>' . h($data['benchmark']['loops']) . '</td></tr>';
-    $result .= '<tr><td>If Else</td><td>' . h($data['benchmark']['ifelse']) . '</td></tr>';
+    $result .= '<tr><td>Math</td><td>' . h($data['benchmark']['math']) . '</td></tr>'."\n";
+    $result .= '<tr><td>String</td><td>' . h($data['benchmark']['string']) . '</td></tr>'."\n";
+    $result .= '<tr><td>Loops</td><td>' . h($data['benchmark']['loops']) . '</td></tr>'."\n";
+    $result .= '<tr><td>If Else</td><td>' . h($data['benchmark']['ifelse']) . '</td></tr>'."\n";
     $result .= '<tr class="even"><td>Calculation total</td><td>' . h(
             $data['benchmark']['calculation']
         ) . '</td></tr>';
@@ -319,12 +319,12 @@ function print_html_result(array $data, bool $showServerName = true)
     if (isset($data['sysinfo']['mysql_version'])) {
         $result .= '<thead><tr><th>MySQL</th><th></th></tr></thead>';
         $result .= '<tbody>';
-        $result .= '<tr><td>MySQL Version</td><td>' . h($data['sysinfo']['mysql_version']) . '</td></tr>';
-        $result .= '<tr><td>MySQL Connect</td><td>' . h($data['benchmark']['mysql_connect']) . '</td></tr>';
-        $result .= '<tr><td>MySQL Select DB</td><td>' . h($data['benchmark']['mysql_select_db']) . '</td></tr>';
-        $result .= '<tr><td>MySQL Query Version</td><td>' . h($data['benchmark']['mysql_query_version']) . '</td></tr>';
-        $result .= '<tr><td>MySQL Benchmark</td><td>' . h($data['benchmark']['mysql_query_benchmark']) . '</td></tr>';
-        $result .= '<tr class="even"><td>MySQL Total</td><td>' . h($data['benchmark']['mysql_total']) . '</td></tr>';
+        $result .= '<tr><td>MySQL Version</td><td>' . h($data['sysinfo']['mysql_version']) . '</td></tr>'."\n";
+        $result .= '<tr><td>MySQL Connect</td><td>' . h($data['benchmark']['mysql_connect']) . '</td></tr>'."\n";
+        $result .= '<tr><td>MySQL Select DB</td><td>' . h($data['benchmark']['mysql_select_db']) . '</td></tr>'."\n";
+        $result .= '<tr><td>MySQL Query Version</td><td>' . h($data['benchmark']['mysql_query_version']) . '</td></tr>'."\n";
+        $result .= '<tr><td>MySQL Benchmark</td><td>' . h($data['benchmark']['mysql_query_benchmark']) . '</td></tr>'."\n";
+        $result .= '<tr class="even"><td>MySQL Total</td><td>' . h($data['benchmark']['mysql_total']) . '</td></tr>'."\n";
         $result .= '</tbody>';
     }
 
