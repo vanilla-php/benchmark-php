@@ -181,6 +181,49 @@ function timer_diff($timeStart)
     return number_format(microtime(true) - $timeStart, 3);
 }
 
+function grading_the_result($total){
+    $grade = array();
+
+    preg_match('/[\d\.]+/', $total, $matches);
+
+    $number = $matches[0];
+
+    if ( $number > 0 and $number <= 0.150 ){
+        $grade = array(
+            'color' => '#5ec52b',
+            'rating' => 'Excellent'
+        ); 
+
+    } elseif ( $number > 0.150 and $number <= 0.350 ){
+        $grade = array(
+            'color' => '#a3a71f',
+            'rating' => 'Good'
+        ); 
+    } elseif ( $number > 0.350 and $number <= 0.750 ){
+        $grade = array(
+            'color' => '#ff6c00',
+            'rating' => 'Acceptable'
+        ); 
+    } elseif ( $number > 0.750 and $number <= 1.0 ){
+        $grade = array(
+            'color' => '#cd5700',
+            'rating' => 'Weak'
+        ); 
+    } elseif ( $number > 1.0 and $number <= 1.5 ){
+        $grade = array(
+            'color' => '#fd0000',
+            'rating' => 'Bad'
+        ); 
+    } else {
+        $grade = array(
+            'color' => '#900',
+            'rating' => 'Awful!'
+        );
+    }
+
+    return $grade;
+}
+
 function print_html_result(array $data, bool $showServerName = true)
 {
     echo "<!DOCTYPE html>\n<html><head>\n";
@@ -328,7 +371,7 @@ function print_html_result(array $data, bool $showServerName = true)
         $result .= '</tbody>';
     }
 
-    $result .= '<thead><tr><th>Total</th><th>' . h($data['benchmark']['total']) . '</th></tr></thead>';
+    $result .= '<thead><tr><th>Total</th><th style="color:'.grading_the_result($data['benchmark']['total'])['color'].'">' . h($data['benchmark']['total']) ." (".grading_the_result($data['benchmark']['total'])['rating'].")".'</th></tr></thead>';
     $result .= '</table>';
 
     echo $result;
